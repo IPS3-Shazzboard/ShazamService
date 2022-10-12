@@ -25,8 +25,8 @@ jobs:
 #    - name: Build with Maven
 #      run: mvn -B package --file pom.xml
       
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
+    - name: Analyze with SonarCloud
+      run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=IPS3-Shazzboard_ShazamService -Dsonar.organization=ips3-shazzboard -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
