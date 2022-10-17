@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("song")
-public class SongResource {
+public class SongRestController {
 
     private final ShazamService shazamService;
 
-    public SongResource(ShazamService shazamService){
+    public SongRestController(ShazamService shazamService){
         this.shazamService = shazamService;
     }
 
