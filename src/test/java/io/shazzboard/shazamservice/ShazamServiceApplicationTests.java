@@ -1,6 +1,6 @@
 package io.shazzboard.shazamservice;
 
-import io.shazzboard.shazamservice.service.ShazamService;
+//import io.shazzboard.shazamservice.service.ShazamService;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
