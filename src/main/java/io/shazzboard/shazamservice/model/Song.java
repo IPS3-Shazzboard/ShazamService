@@ -1,19 +1,28 @@
 package io.shazzboard.shazamservice.model;
 
-public class Song {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+public class Song implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false, updatable = false)
     private Long id;
     private String name;
     private String artist;
     private String duration;
+    private String coverArt;
 
     public Song() {
 
     }
 
-    public Song(String name, String artist, String duration) {
+    public Song(String name, String artist, String duration, String coverArt) {
         this.name = name;
         this.artist = artist;
         this.duration = duration;
+        this.coverArt = coverArt;
     }
 
     public Long getId(){
@@ -28,7 +37,7 @@ public class Song {
         return name;
     }
 
-    public void setName(String artist){
+    public void setName(String name){
         this.name = name;
     }
 
@@ -47,4 +56,8 @@ public class Song {
     public void setDuration(String duration){
         this.duration = duration;
     }
+
+    public String getCoverArt() { return coverArt; }
+
+    public void setCoverArt(String coverArt) {this.coverArt = coverArt; }
 }

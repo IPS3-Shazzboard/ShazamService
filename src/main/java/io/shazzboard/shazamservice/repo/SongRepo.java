@@ -3,6 +3,8 @@ package io.shazzboard.shazamservice.repo;
 import io.shazzboard.shazamservice.model.Song;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SongRepo extends JpaRepository<Song, Long> {
+import java.util.Optional;
 
+public interface SongRepo extends JpaRepository<Song, Long> {
+    Optional<Song> findSongById(Long id);
 }
