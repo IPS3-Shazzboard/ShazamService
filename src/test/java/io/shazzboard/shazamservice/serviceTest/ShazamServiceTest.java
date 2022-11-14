@@ -61,7 +61,7 @@ public class ShazamServiceTest {
         mvc.perform(MockMvcRequestBuilders.post("/song/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(toJson(song)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     public static String toJson(final Object obj) throws JsonProcessingException {
