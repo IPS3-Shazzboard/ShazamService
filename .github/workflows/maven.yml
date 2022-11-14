@@ -26,18 +26,14 @@ jobs:
       run: | 
         mvn -B verify --file pom.xml
         mkdir staging && cp target/*.jar staging
-      
-    check-quality:
-      runs-on: ubuntu-latest
-      name: A job to check my code quality
-      steps:
-        - name: Check code meets quality standards
-          id: codiga
-          uses: codiga/github-action@master
-          with:
-            repo_token: ${{ secrets.GITHUB_TOKEN }}
-            codiga_api_token: ${{ secrets.CODIGA_TOKEN }}
-            min_quality_score: '75'
-            max_defects_rate: '0.0001'
-            max_timeout_sec: '600'
+
+    - name: Check code meets quality standards
+      id: codiga
+      uses: codiga/github-action@master
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        codiga_api_token: ${{ secrets.CODIGA_TOKEN }}
+        min_quality_score: '75'
+        max_defects_rate: '0.0001'
+        max_timeout_sec: '600'
 
