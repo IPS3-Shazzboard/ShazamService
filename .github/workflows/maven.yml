@@ -27,9 +27,17 @@ jobs:
         mvn -B verify --file pom.xml
         mkdir staging && cp target/*.jar staging
       
-    - name: Analyze with SonarCloud
-      run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=IPS3-Shazzboard_ShazamService -Dsonar.organization=ips3-shazzboard -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    check-quality:
+      runs-on: ubuntu-latest
+      name: A job to check my code quality
+      steps:
+        - name: Check code meets quality standards
+          id: codiga
+          uses: codiga/github-action@master
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            codiga_api_token: ${{ secrets.CODIGA_TOKEN }}
+            min_quality_score: '75'
+            max_defects_rate: '0.0001'
+            max_timeout_sec: '600'
 
