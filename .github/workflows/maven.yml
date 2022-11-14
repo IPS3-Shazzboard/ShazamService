@@ -34,6 +34,6 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         codiga_api_token: ${{ secrets.CODIGA_TOKEN }}
         min_quality_score: '75'
-        max_defects_rate: '0.0001'
+        max_defects_rate: '0.01'
         max_timeout_sec: '600'
 
