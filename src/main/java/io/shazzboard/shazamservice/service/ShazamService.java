@@ -26,6 +26,8 @@ public class ShazamService {
         return songRepo.findSongById(id);
     }
 
+    public Song findSongByNameAndArtist(String name, String artist) { return songRepo.findSongByNameAndArtist(name, artist); }
+
     public Song addSong(Song song) {
         return songRepo.save(song);
     }
