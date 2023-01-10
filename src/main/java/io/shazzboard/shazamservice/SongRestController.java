@@ -4,6 +4,7 @@ import io.shazzboard.shazamservice.model.Song;
 import io.shazzboard.shazamservice.service.ShazamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +27,17 @@ public class SongRestController {
 
     @PostMapping("/add")
     public ResponseEntity<Song> addSong(@RequestBody Song song) {
-        Song newSong = shazamService.addSong(song);
-        return new ResponseEntity<>(newSong, HttpStatus.CREATED);
+        if (!StringUtils.hasText(song.getName()) || !StringUtils.hasText(song.getArtist()) ||
+                !StringUtils.hasText(song.getDuration()) || !StringUtils.hasText(song.getCoverArt())) {
+            return new ResponseEntity<>(song, HttpStatus.BAD_REQUEST);
+        }
+        if (shazamService.findSongByNameAndArtist(song.getName(), song.getArtist()) != null) {
+            return new ResponseEntity<>(song, HttpStatus.CONFLICT);
+        }
+        else {
+            Song newSong = shazamService.addSong(song);
+            return new ResponseEntity<>(newSong, HttpStatus.CREATED);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
