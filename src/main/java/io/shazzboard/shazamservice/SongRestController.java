@@ -19,12 +19,14 @@ public class SongRestController {
         this.shazamService = shazamService;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/all")
     public ResponseEntity<List<Song>> getAllSongs() {
         List<Song> songs = shazamService.listAllSongs();
         return new ResponseEntity<>(songs, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/add")
     public ResponseEntity<Song> addSong(@RequestBody Song song) {
         if (!StringUtils.hasText(song.getName()) || !StringUtils.hasText(song.getArtist()) ||
@@ -40,6 +42,7 @@ public class SongRestController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteSong (@PathVariable("id") Long id) {
         shazamService.deleteSong(id);
